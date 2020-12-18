@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title style="text-align: center;">
+      QR Code Token
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" style="text-align: center;">QR Code Token</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+
+    <ion-card *ngIf="token" style="padding-top: 20px;">
+      <ngx-qrcode 
+      [elementType]="elementType" 
+      [value] = "token"
+      cssClass = "aclass"
+      errorCorrectionLevel = "L">
+      </ngx-qrcode>
+
+      <ion-card-content>
+        <p>Valor: {{token}}</p>
+      </ion-card-content>
+
+    </ion-card>
+    
+    <button ion-button full (click)="createCode()"><ion-icon>qr-code-sharp</ion-icon>Novo QR Code</button>
+
+  </div>
+</ion-content>
