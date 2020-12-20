@@ -28,8 +28,10 @@
       </ion-card-content>
 
     </ion-card>
+
+    <ion-input placeholder="Gerar QRCode" [formControl]="input"></ion-input>
     
-    <button ion-button full (click)="createCode()"><ion-icon>qr-code-sharp</ion-icon>Novo QR Code</button>
+    <button ion-button full (click)="cryptograph()"><ion-icon>qr-code-sharp</ion-icon>Novo QR Code</button>
 
   </div>
 </ion-content>

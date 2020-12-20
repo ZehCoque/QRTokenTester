@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
+
 import { HomePageRoutingModule } from './home-routing.module';
+
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -14,7 +17,9 @@ import { HomePageRoutingModule } from './home-routing.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    NgxQRCodeModule
+    NgxQRCodeModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   declarations: [HomePage]
 })
