@@ -17,12 +17,9 @@
   <div id="container">
 
     <ion-card *ngIf="scannedCode" style="padding: 20px;">
-      <ngx-qrcode 
-      [elementType]="elementType" 
-      [value] = "scannedCode"
-      cssClass = "aclass"
-      errorCorrectionLevel = "L">
-      </ngx-qrcode>
+      <ion-card-content>
+        {{scannedCode}}
+      </ion-card-content>
 
     </ion-card>
     
