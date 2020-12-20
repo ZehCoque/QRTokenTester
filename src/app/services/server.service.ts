@@ -16,7 +16,7 @@ export class ServerService {
       body: data,
       responseType: 'json',
       observe: 'body',
-      withCredentials: true
+      withCredentials: false
     });
 
     return new Promise((resolve, reject) => {
