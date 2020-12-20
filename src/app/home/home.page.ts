@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { ServerService } from '../services/server.service';
 
 @Component({
@@ -9,15 +9,15 @@ import { ServerService } from '../services/server.service';
 })
 export class HomePage {
 
-  token: any = 'bd53607fa0fa5c322b93912dc556e4d4591f7d6f3219ff51714b1769e12cbbcd';
-  elementType: string = 'url';
+  token: any;
+  elementType: 'url' | 'canvas' | 'img' = 'url';
   input: FormControl;
 
 
   constructor(private server: ServerService) {}
 
   ngOnInit() {
-    this.input = new FormControl('');
+    this.input = new FormControl('',Validators.required);
   }
 
   cryptograph() {
@@ -25,6 +25,7 @@ export class HomePage {
     	this.server.POST('tokenGenerator',{text: this.input.value}).then((response:any) => {
         console.log(response);
         this.token = response.hash;
+        this.input.reset();
       })
   }
 

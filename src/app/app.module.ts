@@ -16,6 +16,9 @@ import { ServerService } from './services/server.service';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx'
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,12 +29,14 @@ import { HttpClientModule } from '@angular/common/http';
     NgxQRCodeModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     ServerService,
     StatusBar,
     SplashScreen,
+    BarcodeScanner,
+    Base64ToGallery,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

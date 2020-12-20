@@ -1,5 +1,7 @@
 {
   "name": "QRTokenTester",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

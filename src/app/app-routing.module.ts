@@ -7,10 +7,19 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'scan',
+    loadChildren: () => import('./scan/scan.module').then( m => m.ScanPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'scan',
+    loadChildren: () => import('./scan/scan.module').then( m => m.ScanPageModule)
+  },
+
 ];
 
 @NgModule({
