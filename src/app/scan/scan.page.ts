@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
-import { ToastController } from '@ionic/angular';
 import { ServerService } from '../services/server.service';
 
 @Component({
@@ -11,12 +9,10 @@ import { ServerService } from '../services/server.service';
 })
 export class ScanPage implements OnInit {
   scannedCode: any;
-  elementType: 'url' | 'canvas' | 'img' = 'url';
+  elementType: 'url' | 'canvas' | 'img' = 'canvas';
 
   constructor(
     private barcodeScanner: BarcodeScanner,
-    private base64ToGallery: Base64ToGallery,
-    private toastCtrl: ToastController,
     private server: ServerService
   ) { }
 

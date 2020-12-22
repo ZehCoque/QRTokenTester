@@ -19,6 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx'
 
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -37,6 +39,7 @@ import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx'
     SplashScreen,
     BarcodeScanner,
     Base64ToGallery,
+    AndroidPermissions,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
