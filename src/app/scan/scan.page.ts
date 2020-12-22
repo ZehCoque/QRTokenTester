@@ -24,7 +24,7 @@ export class ScanPage implements OnInit {
   scanCode() {
     this.barcodeScanner.scan().then(
       barcodeData => {
-        this.scannedCode = barcodeData;
+        this.scannedCode = barcodeData.text;
       }
     )
   }
