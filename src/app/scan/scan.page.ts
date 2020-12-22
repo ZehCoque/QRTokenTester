@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 import { ToastController } from '@ionic/angular';
+import { ServerService } from '../services/server.service';
 
 @Component({
   selector: 'app-scan',
@@ -15,7 +16,8 @@ export class ScanPage implements OnInit {
   constructor(
     private barcodeScanner: BarcodeScanner,
     private base64ToGallery: Base64ToGallery,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private server: ServerService
   ) { }
 
   ngOnInit() {
@@ -24,9 +26,10 @@ export class ScanPage implements OnInit {
   scanCode() {
     this.barcodeScanner.scan().then(
       barcodeData => {
-        this.scannedCode = barcodeData.text;
-      }
-    )
+        this.server.POST('tokenGenerator',{procedure: "encrypt", text: barcodeData.text}).then((response:any) => {
+        this.scannedCode = response.value;
+      })
+    });
   }
 
 }

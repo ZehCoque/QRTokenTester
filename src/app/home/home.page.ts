@@ -22,7 +22,7 @@ export class HomePage {
 
   cryptograph() {
     console.log(this.input.value)
-    	this.server.POST('tokenGenerator',{text: this.input.value}).then((response:any) => {
+    	this.server.POST('tokenGenerator',{procedure: "encrypt", text: this.input.value}).then((response:any) => {
         console.log(response);
         this.token = response.hash;
         this.input.reset();
