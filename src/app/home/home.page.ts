@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
-import { ToastController } from '@ionic/angular';
+import { FormControl } from '@angular/forms';
 import { ServerService } from '../services/server.service';
-import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { Requisição } from '../classes/requisições';
 
 @Component({
   selector: 'app-home',
@@ -18,67 +16,77 @@ export class HomePage {
 
   hasWriteAccess: boolean = false;
 
+  Requisicoes: Array<Requisição> = new Array();
+  Exames: Array<string> = new Array();
 
-  constructor(private server: ServerService,
-              private base64ToGallery: Base64ToGallery,
-              private toastCtrl: ToastController,
-              private androidPermissions: AndroidPermissions) {}
+  constructor(public server: ServerService) {}
 
-  ngOnInit() {
-    this.input = new FormControl('',Validators.required);
-  }
+  ngOnInit(): void {
 
-  ionViewWillEnter() {
-    this.checkPermissions();
- }
- 
- checkPermissions() {
-    this.androidPermissions
-    .checkPermission(this.androidPermissions
-    .PERMISSION.WRITE_EXTERNAL_STORAGE)
-    .then((result) => {
-     console.log('Has permission?',result.hasPermission);
-     this.hasWriteAccess = result.hasPermission;
-   },(err) => {
-       this.androidPermissions
-         .requestPermission(this.androidPermissions
-         .PERMISSION.WRITE_EXTERNAL_STORAGE);
-    });
-    if (!this.hasWriteAccess) {
-      this.androidPermissions
-        .requestPermissions([this.androidPermissions
-        .PERMISSION.WRITE_EXTERNAL_STORAGE]);
+    this.server.POST({selector: 'get_exames'}).then((exames: any) => {
+      let matcher = [];
+
+      exames.forEach(element => {
+        matcher[element.ID] = element.Exame
+      });
+
+      this.server.POST({selector:'get_requisição'}).then((response: any) => {
+        response.forEach((element)=> {
+
+          let split = element.Exames.split('#');
+          split.pop();
+
+          let exames_list = []
+          split.forEach(id => {
+            exames_list.push(matcher[id])
+          });
+
+          let json = {
+            ID: element.ID,
+            Carteira: element.Carteira,
+            Exames: exames_list,
+            Status: element.Status}
+
+          this.Requisicoes.push(json);
+
+          });
+        });
+
+      })
+
     }
- }
+
+//   ionViewWillEnter() {
+//     this.checkPermissions();
+//  }
+ 
+//  checkPermissions() {
+//     this.androidPermissions
+//     .checkPermission(this.androidPermissions
+//     .PERMISSION.WRITE_EXTERNAL_STORAGE)
+//     .then((result) => {
+//      console.log('Has permission?',result.hasPermission);
+//      this.hasWriteAccess = result.hasPermission;
+//    },(err) => {
+//        this.androidPermissions
+//          .requestPermission(this.androidPermissions
+//          .PERMISSION.WRITE_EXTERNAL_STORAGE);
+//     });
+//     if (!this.hasWriteAccess) {
+//       this.androidPermissions
+//         .requestPermissions([this.androidPermissions
+//         .PERMISSION.WRITE_EXTERNAL_STORAGE]);
+//     }
+//  }
   
 
-  cryptograph() {
-    console.log(this.input.value)
-    	this.server.POST('tokenGenerator',{procedure: "encrypt", text: this.input.value}).then((response:any) => {
-        console.log(response);
-        this.token = response.hash;
-        this.input.reset();
-      })
-  }
-
-  downloadQR() {
-    const canvas = document.querySelector('canvas') as HTMLCanvasElement;
-    const imageData = canvas.toDataURL('image/jpeg').toString();
-
-    let data = imageData.split(',')[1];
-
-    console.log(data);
-
-    this.base64ToGallery.base64ToGallery(data, {
-      prefix:'_img',mediaScanner: false
-    }).then(async res => {
-      let toast = await this.toastCtrl.create({
-        header: 'QR Code salvo na Galeria'
-      });
-      toast.present();
-    }).catch(err => console.log(err));
-          
-
-  }
+  // cryptograph() {
+  //   console.log(this.input.value)
+  //   	this.server.POST('tokenGenerator',{procedure: "encrypt", text: this.input.value}).then((response:any) => {
+  //       console.log(response);
+  //       this.token = response.hash;
+  //       this.input.reset();
+  //     })
+  // }
 
 }

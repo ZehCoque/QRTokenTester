@@ -10,6 +10,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { ExamesAprovPipe } from '../pipes/exames-aprov.pipe';
 
 @NgModule({
   imports: [
@@ -21,6 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  declarations: [HomePage]
+  declarations: [
+    HomePage,
+    ExamesAprovPipe]
 })
 export class HomePageModule {}
