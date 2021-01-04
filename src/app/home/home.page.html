@@ -27,14 +27,19 @@
     </ion-card> -->
     
     <div *ngFor="let requisicao of Requisicoes">
-
-      <ion-card>
+      <ion-button expand="full" color="transparent" style="display: flex; justify-content: space-between; padding: 0;">
+      <ion-card style="width: 100%;">
+       
         <ion-item>
           <ion-label>{{requisicao.ID}}</ion-label>
-          <ion-button fill="outline" slot="end">{{requisicao.Status | examesAprov}}</ion-button>
+          <ion-button *ngIf="requisicao.Status == 0" fill="outline" slot="end">{{requisicao.Status | examesAprov}}</ion-button>
+          <ion-button *ngIf="requisicao.Status == 1" fill="outline" slot="end" color="success" (click)="navigateAprovado(requisicao.ID)">{{requisicao.Status | examesAprov}}</ion-button>
+          <ion-button *ngIf="requisicao.Status == 2" fill="outline" slot="end" color="danger">{{requisicao.Status | examesAprov}}</ion-button>
+          <ion-button *ngIf="requisicao.Status == 3" fill="outline" slot="end" color="warn">{{requisicao.Status | examesAprov}}</ion-button>
         </ion-item>
-      
+     
       </ion-card>
+    </ion-button>
 
     </div>
 

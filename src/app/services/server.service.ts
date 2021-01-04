@@ -26,5 +26,9 @@ export class ServerService {
     return this.request('POST', `${environment.serverURL}`, data);
   }
 
+  tokenFunc(functionURL: string, body: any) {
+    return this.request('POST', `${environment.tokenFuncURL}/${functionURL}`,body);
+  }
+
 
 }

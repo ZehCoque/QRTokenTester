@@ -22,7 +22,7 @@ export class ScanPage implements OnInit {
   scanCode() {
     this.barcodeScanner.scan().then(
       barcodeData => {
-        this.server.POST('tokenGenerator',{procedure: "decrypt", text: barcodeData.text}).then((response:any) => {
+        this.server.tokenFunc('tokenGenerator',{procedure: "decrypt", text: barcodeData.text}).then((response:any) => {
           console.log(response.value)
         this.scannedCode = response.value;
       })

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ServerService } from '../services/server.service';
 import { Requisição } from '../classes/requisições';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomePage {
   Requisicoes: Array<Requisição> = new Array();
   Exames: Array<string> = new Array();
 
-  constructor(public server: ServerService) {}
+  constructor(public server: ServerService,
+              private router: Router) {}
 
   ngOnInit(): void {
 
@@ -54,6 +56,15 @@ export class HomePage {
 
       })
 
+    }
+
+    navigateAprovado(ID: number) {
+      let navigationExtras: NavigationExtras = {
+        state: {
+          ID: ID
+        }
+      };
+      this.router.navigate(['home/aprovado'], navigationExtras);
     }
 
 //   ionViewWillEnter() {
