@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-//If you have CORS issues on AWS Lambda, enable CORS on the API Gateway and REDEPLOY!
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,8 +22,8 @@ export class ServerService {
     });
   }
 
-  POST(functionURL: string, body: any) {
-    return this.request('POST', `${environment.serverURL}/${functionURL}`,body);
+  POST(data) {
+    return this.request('POST', `${environment.serverURL}`, data);
   }
 
 

@@ -16,7 +16,7 @@
 
   <div id="container">
 
-    <ion-card *ngIf="token" style="padding: 20px;">
+    <!-- <ion-card *ngIf="token" style="padding: 20px;">
       <ngx-qrcode 
       [elementType]="elementType" 
       [value] = "token"
@@ -24,13 +24,20 @@
       errorCorrectionLevel = "L">
       </ngx-qrcode>
 
-    </ion-card>
-
-    <ion-input placeholder="Gerar QRCode" [formControl]="input"></ion-input>
+    </ion-card> -->
     
-    <ion-button [disabled]="!input.valid" expand="full" (click)="cryptograph()"><ion-icon name="qr-code"></ion-icon>Gerar QR Code</ion-button>
+    <div *ngFor="let requisicao of Requisicoes">
 
-    <!-- <ion-button [disabled]="!token" expand="full" color="tertiary" (click)="downloadQR()"><ion-icon name="download"></ion-icon>Fazer Download</ion-button> -->
+      <ion-card>
+        <ion-item>
+          <ion-label>{{requisicao.ID}}</ion-label>
+          <ion-button fill="outline" slot="end">{{requisicao.Status | examesAprov}}</ion-button>
+        </ion-item>
+      
+      </ion-card>
+
+    </div>
+
 
   </div>
 </ion-content>
