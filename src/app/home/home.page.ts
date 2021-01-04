@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ServerService } from '../services/server.service';
 import { Requisição } from '../classes/requisições';
-<<<<<<< HEAD
 import { Router, NavigationExtras } from '@angular/router';
-=======
->>>>>>> 6fe3e605872f1dcbe95ffe7c7c36fe5d45ed1e67
 
 @Component({
   selector: 'app-home',
@@ -14,21 +11,11 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class HomePage {
 
-  token: any = "test";
-  elementType: 'url' | 'canvas' | 'img' = 'canvas';
-  input: FormControl;
-
-  hasWriteAccess: boolean = false;
-
   Requisicoes: Array<Requisição> = new Array();
   Exames: Array<string> = new Array();
 
-<<<<<<< HEAD
   constructor(public server: ServerService,
-              private router: Router) {}
-=======
-  constructor(public server: ServerService) {}
->>>>>>> 6fe3e605872f1dcbe95ffe7c7c36fe5d45ed1e67
+              public router: Router) {}
 
   ngOnInit(): void {
 
@@ -72,6 +59,15 @@ export class HomePage {
         }
       };
       this.router.navigate(['home/aprovado'], navigationExtras);
+    }
+    
+    navigateNaoAprovado(ID: number) {
+      let navigationExtras: NavigationExtras = {
+        state: {
+          ID: ID
+        }
+      };
+      this.router.navigate(['home/nao-aprovado'], navigationExtras);
     }
 
 //   ionViewWillEnter() {

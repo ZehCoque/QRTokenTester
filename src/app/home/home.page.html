@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title style="text-align: center;">
-      QR Code Token
+      Requisições de Exame
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,15 +16,7 @@
 
   <div id="container">
 
-    <!-- <ion-card *ngIf="token" style="padding: 20px;">
-      <ngx-qrcode 
-      [elementType]="elementType" 
-      [value] = "token"
-      cssClass = "aclass"
-      errorCorrectionLevel = "L">
-      </ngx-qrcode>
 
-    </ion-card> -->
     
     <div *ngFor="let requisicao of Requisicoes">
       <ion-button expand="full" color="transparent" style="display: flex; justify-content: space-between; padding: 0;">
@@ -34,7 +26,7 @@
           <ion-label>{{requisicao.ID}}</ion-label>
           <ion-button *ngIf="requisicao.Status == 0" fill="outline" slot="end">{{requisicao.Status | examesAprov}}</ion-button>
           <ion-button *ngIf="requisicao.Status == 1" fill="outline" slot="end" color="success" (click)="navigateAprovado(requisicao.ID)">{{requisicao.Status | examesAprov}}</ion-button>
-          <ion-button *ngIf="requisicao.Status == 2" fill="outline" slot="end" color="danger">{{requisicao.Status | examesAprov}}</ion-button>
+          <ion-button *ngIf="requisicao.Status == 2" fill="outline" slot="end" color="danger" (click)="navigateNaoAprovado(requisicao.ID)">{{requisicao.Status | examesAprov}}</ion-button>
           <ion-button *ngIf="requisicao.Status == 3" fill="outline" slot="end" color="warn">{{requisicao.Status | examesAprov}}</ion-button>
         </ion-item>
      
